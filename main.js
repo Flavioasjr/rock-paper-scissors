@@ -1,42 +1,38 @@
 function computerPlay() {
     const game = ['Rock', 'Paper', 'Scissors'];
-    const numberRandom = () => parseInt(Math.random() * (3 - 0) + 0);
+    const numberRandom = () => parseInt(Math.random() * 3);
 
     return game[numberRandom()];
+}
+
+const gameResult = {
+    ROCK: {
+        ROCK:  'Tied game',
+        PAPER: 'Computer won',
+        SCISSORS: 'Player won'
+    },
+    PAPER: {
+        ROCK:  'Player won',
+        PAPER: 'Tied game',
+        SCISSORS: 'Computer won'
+    },
+    SCISSORS: {
+        ROCK:  'Computer won',
+        PAPER: 'Player wonn',
+        SCISSORS: 'Tied game'
+    }
 }
 
 function playRound(playerSelection, computerSelection) {
     if (typeof playerSelection !== 'string' || typeof computerSelection !== 'string') return 'error';
 
-    const player = playerSelection;
-    const computer = computerSelection;
-
-    if (player === 'ROCK') {
-        if (computer === 'ROCK') return `computer is ${computer}. tied game`;
-        if (computer === 'PAPER') return `computer is ${computer}. Computer won.`;
-        if (computer === 'SCISSORS') return `computer is ${computer}. Player won.  `;
-    }
-
-    if (player === 'PAPER') {
-        if (computer === 'PAPER') return `computer is ${computer}. tied game`;
-        if (computer === 'SCISSORS') return `computer is ${computer}. Computer won.`;
-        if (computer === 'ROCK') return `computer is ${computer}. Player won.  `;
-    }
-
-    if (player === 'SCISSORS') {
-        if (computer === 'SCISSORS') return `computer is ${computer}. tied game`;
-        if (computer === 'ROCK') return `computer is ${computer}. Computer won.`;
-        if (computer === 'PAPER') return `computer is ${computer}. Player won.  `;
-    }
-
-    return 'error';
+    return gameResult[playerSelection][computerSelection];
 }
 
 function game() {
-    // const playerSelection = 'scissors';
     let game;
-    let player = 0;
-    let computer = 0;
+    let playerScore = 0;
+    let computerScore = 0;
 
     for (let i = 0; i < 5; i++) {
         let computerSelection = computerPlay();
@@ -44,22 +40,22 @@ function game() {
         computerSelection = computerSelection.toUpperCase();
         playerSelection = playerSelection.toUpperCase();
 
-        if(playerSelection !== 'ROCK' && playerSelection !== 'PAPER' && playerSelection !== 'SCISSORS') return alert('Invalid value');
+        if(playerSelection !== 'ROCK' && 
+        playerSelection !== 'PAPER' && 
+        playerSelection !== 'SCISSORS') return alert('Invalid value');
 
         game = playRound(playerSelection, computerSelection);
 
         console.log(game);
-        game = game.substr(-13);
-        game = game.trim();
 
-        if(game === 'Player won.') player++;
-        if(game === 'Computer won.') computer++;
-        console.log('Player:', player);
-        console.log('Computer:', computer);
+        if(game === 'Player won') playerScore++;
+        if(game === 'Computer won') computerScore++;
+        console.log('Player:', playerScore);
+        console.log('Computer:', computerScore);
     }
 
-    if (player > computer) return `Player won.`
-    if (player < computer) return `Computer won.`
+    if (playerScore > computerScore) return `Player won.`
+    if (playerScore < computerScore) return `Computer won.`
     return 'Tied game';
 }
 

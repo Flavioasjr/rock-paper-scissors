@@ -43,6 +43,7 @@ let computerScore = 0;
 function game(e) {
     const computerSelection = computerPlay();
     const roundWinner = playRound(e.target.value, computerSelection);
+
     const div = document.createElement('div');
     div.classList.add('round_results');
 
@@ -55,20 +56,20 @@ function game(e) {
 
     results.appendChild(div);
 
-    const divTwo = document.createElement('div');
+    const divWinner = document.createElement('div');
     
     if (playerScore == 5 || computerScore == 5) {
         if (playerScore > computerScore) {
-            divTwo.textContent = 'Player won the game.';
-            divTwo.classList.add('winner-player');
+            divWinner.textContent = 'Player won the game.';
+            divWinner.classList.add('winner-player');
         }
         
         if (playerScore < computerScore) {
-            divTwo.textContent = 'Computer won the game.'
-            divTwo.classList.add('winner-computer');
+            divWinner.textContent = 'Computer won the game.'
+            divWinner.classList.add('winner-computer');
         }
 
-        body.appendChild(divTwo);
+        body.appendChild(divWinner);
         body.removeChild(btn);
         const button = document.createElement('button');
         button.textContent = 'RESTART';

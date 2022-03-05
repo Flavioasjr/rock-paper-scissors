@@ -39,11 +39,11 @@ function playRound(playerSelection, computerSelection) {
 let playerScore = 0;
 let computerScore = 0;
 
-btn.addEventListener('click', e => {
-
+function game(e) {
     const computerSelection = computerPlay();
     const roundWinner = playRound(e.target.value, computerSelection);
     const div = document.createElement('div');
+    div.classList.add('round_results');
 
     div.textContent += `Computer is ${computerSelection} and player is ${e.target.value}.
                             ${roundWinner} this round.`;
@@ -60,6 +60,12 @@ btn.addEventListener('click', e => {
         if (playerScore < computerScore) divTwo.textContent = 'Computer won the game.'
         body.appendChild(divTwo);
         body.removeChild(btn);
+        const button = document.createElement('button');
+        button.textContent = 'RESTART';
+        body.appendChild(button);
+        button.addEventListener('click', e => location.reload());
     }
-});
+} 
+
+btn.addEventListener('click', game);
 

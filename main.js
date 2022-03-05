@@ -1,5 +1,6 @@
 const btn = document.querySelector('.buttons');
 const body = document.querySelector('body');
+const results = document.querySelector('.results');
 
 function computerPlay() {
     const game = ['Rock', 'Paper', 'Scissors'];
@@ -52,12 +53,21 @@ function game(e) {
     if (roundWinner === 'Computer won') computerScore++;
     div.textContent += ` Player: ${playerScore}. Computer: ${computerScore}`;
 
-    body.appendChild(div);
+    results.appendChild(div);
 
     const divTwo = document.createElement('div');
+    
     if (playerScore == 5 || computerScore == 5) {
-        if (playerScore > computerScore) divTwo.textContent = 'Player won the game.'
-        if (playerScore < computerScore) divTwo.textContent = 'Computer won the game.'
+        if (playerScore > computerScore) {
+            divTwo.textContent = 'Player won the game.';
+            divTwo.classList.add('winner-player');
+        }
+        
+        if (playerScore < computerScore) {
+            divTwo.textContent = 'Computer won the game.'
+            divTwo.classList.add('winner-computer');
+        }
+
         body.appendChild(divTwo);
         body.removeChild(btn);
         const button = document.createElement('button');

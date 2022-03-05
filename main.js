@@ -27,8 +27,8 @@ const gameResult = {
 }
 
 function playRound(playerSelection, computerSelection) {
-    if (typeof playerSelection !== 'string' 
-    || typeof computerSelection !== 'string') return 'error';
+    if (typeof playerSelection !== 'string'
+        || typeof computerSelection !== 'string') return 'error';
 
     playerSelection = playerSelection.toUpperCase();
     computerSelection = computerSelection.toUpperCase();
@@ -36,46 +36,30 @@ function playRound(playerSelection, computerSelection) {
     return gameResult[playerSelection][computerSelection];
 }
 
+let playerScore = 0;
+let computerScore = 0;
+
 btn.addEventListener('click', e => {
+
     const computerSelection = computerPlay();
-    const winnerRound = playRound(e.target.value, computerSelection);
+    const roundWinner = playRound(e.target.value, computerSelection);
     const div = document.createElement('div');
 
     div.textContent += `Computer is ${computerSelection} and player is ${e.target.value}.
-     ${winnerRound} this round.`;
+                            ${roundWinner} this round.`;
+
+    if (roundWinner === 'Player won') playerScore++;
+    if (roundWinner === 'Computer won') computerScore++;
+    div.textContent += ` Player: ${playerScore}. Computer: ${computerScore}`;
+
     body.appendChild(div);
+
+    const divTwo = document.createElement('div');
+    if (playerScore == 5 || computerScore == 5) {
+        if (playerScore > computerScore) divTwo.textContent = 'Player won the game.'
+        if (playerScore < computerScore) divTwo.textContent = 'Computer won the game.'
+        body.appendChild(divTwo);
+        body.removeChild(btn);
+    }
 });
 
-// function game() {
-//     let game;
-//     let playerScore = 0;
-//     let computerScore = 0;
-
-//     for (let i = 0; i < 5; i++) {
-//         let computerSelection = computerPlay();
-//         let playerSelection = prompt('Choose rock, paper or scissors');
-//         computerSelection = computerSelection.toUpperCase();
-//         playerSelection = playerSelection.toUpperCase();
-
-//         if(playerSelection !== 'ROCK' && 
-//         playerSelection !== 'PAPER' && 
-//         playerSelection !== 'SCISSORS') return alert('Invalid value');
-
-//         game = playRound(playerSelection, computerSelection);
-
-//         console.log(game);
-
-//         if(game === 'Player won') playerScore++;
-//         if(game === 'Computer won') computerScore++;
-//         console.log('Player:', playerScore);
-//         console.log('Computer:', computerScore);
-//     }
-
-//     if (playerScore > computerScore) return `Player won.`
-//     if (playerScore < computerScore) return `Computer won.`
-//     return 'Tied game';
-// }
-
-// const winner = game();
-
-// console.log(winner);

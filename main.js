@@ -1,5 +1,3 @@
-const btn = document.querySelector('.buttons');
-const results = document.querySelector('.results');
 const restartButton = document.createElement('button');
 
 function computerPlay() {
@@ -58,6 +56,8 @@ const displayChoices = {
 function gameDisplay(playerSelection, computerSelection, gameWinner, playerScore, computerScore) {
     playerSelection = playerSelection.toUpperCase();
     computerSelection = computerSelection.toUpperCase();
+    const results = document.querySelector('.results');
+    const buttonsClass = document.querySelector('.buttons');
 
     const choices = displayChoices[playerSelection][computerSelection];
 
@@ -72,12 +72,12 @@ function gameDisplay(playerSelection, computerSelection, gameWinner, playerScore
         p.textContent = 'DRAW!';
         resetButton.textContent = 'Play Again';
 
-        btn.appendChild(div);
+        buttonsClass.appendChild(div);
         div.appendChild(p);
         div.appendChild(resetButton);
 
         const rockClone = btnRock.cloneNode(true);
-        btn.appendChild(rockClone);
+        buttonsClass.appendChild(rockClone);
     }
 
     if (choices === 'rock paper') {
@@ -87,12 +87,12 @@ function gameDisplay(playerSelection, computerSelection, gameWinner, playerScore
         p.textContent = 'LOSE!';
         resetButton.textContent = 'Play Again';
 
-        btn.appendChild(div);
+        buttonsClass.appendChild(div);
         div.appendChild(p);
         div.appendChild(resetButton);
 
         const paperClone = btnPaper.cloneNode(true);
-        btn.appendChild(paperClone);
+        buttonsClass.appendChild(paperClone);
     }
 
     if (choices === 'rock scissors') {
@@ -101,7 +101,7 @@ function gameDisplay(playerSelection, computerSelection, gameWinner, playerScore
         p.textContent = 'WIN!';
         resetButton.textContent = 'Play Again';
 
-        btn.insertBefore(div, btnScissors);
+        buttonsClass.insertBefore(div, btnScissors);
         div.appendChild(p);
         div.appendChild(resetButton);
     }
@@ -113,12 +113,12 @@ function gameDisplay(playerSelection, computerSelection, gameWinner, playerScore
         p.textContent = 'DRAW!';
         resetButton.textContent = 'Play Again';
 
-        btn.appendChild(div);
+        buttonsClass.appendChild(div);
         div.appendChild(p);
         div.appendChild(resetButton);
 
         const paperClone = btnPaper.cloneNode(true);
-        btn.appendChild(paperClone);
+        buttonsClass.appendChild(paperClone);
     }
 
     if (choices === 'paper rock') {
@@ -127,7 +127,7 @@ function gameDisplay(playerSelection, computerSelection, gameWinner, playerScore
         p.textContent = 'WIN!';
         resetButton.textContent = 'Play Again';
 
-        btn.insertBefore(div, btnPaper);
+        buttonsClass.insertBefore(div, btnPaper);
         div.appendChild(p);
         div.appendChild(resetButton);
     }
@@ -138,7 +138,7 @@ function gameDisplay(playerSelection, computerSelection, gameWinner, playerScore
         p.textContent = 'LOSE!';
         resetButton.textContent = 'Play Again';
 
-        btn.insertBefore(div, btnScissors);
+        buttonsClass.insertBefore(div, btnScissors);
         div.appendChild(p);
         div.appendChild(resetButton);
     }
@@ -164,7 +164,7 @@ function gameDisplay(playerSelection, computerSelection, gameWinner, playerScore
         p.textContent = 'LOSE!';
         resetButton.textContent = 'Play Again';
 
-        btn.insertBefore(div, btnScissors);
+        buttonsClass.insertBefore(div, btnScissors);
         div.appendChild(p);
         div.appendChild(resetButton);
     }
@@ -175,7 +175,7 @@ function gameDisplay(playerSelection, computerSelection, gameWinner, playerScore
         p.textContent = 'WIN!';
         resetButton.textContent = 'Play Again';
 
-        btn.insertBefore(div, btnScissors);
+        buttonsClass.insertBefore(div, btnScissors);
         div.appendChild(p);
         div.appendChild(resetButton);
     }
@@ -209,8 +209,6 @@ function gameDisplay(playerSelection, computerSelection, gameWinner, playerScore
     results.appendChild(pResults);
 }
 
-
-
 let playerScore = 0;
 let computerScore = 0;
 
@@ -223,6 +221,7 @@ function game(e) {
 
     let storagePlayerScore = localStorage.getItem('playerScore');
     let storageComputerScore = localStorage.getItem('computerScore');
+
     playerScore = Number(storagePlayerScore);
     computerScore = Number(storageComputerScore);
 
@@ -250,8 +249,6 @@ function game(e) {
         gameWinner = 'computer win';
     }
 
-    
-
     localStorage.setItem('playerScore', playerScore);
     localStorage.setItem('computerScore', computerScore);
 
@@ -269,5 +266,3 @@ const btnScissors = document.querySelector('.btn-scissors')
 btnRock.addEventListener('click', game);
 btnPaper.addEventListener('click', game);
 btnScissors.addEventListener('click', game);
-
-

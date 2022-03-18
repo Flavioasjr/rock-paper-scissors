@@ -81,18 +81,14 @@ function gameDisplay(playerSelection, computerSelection, gameWinner, playerScore
     }
 
     if (choices === 'rock paper') {
-        btnPaper.parentNode.removeChild(btnPaper);
         btnScissors.parentNode.removeChild(btnScissors);
 
         p.textContent = 'LOSE!';
         resetButton.textContent = 'Play Again';
 
-        buttonsClass.appendChild(div);
+        buttonsClass.insertBefore(div, btnPaper);
         div.appendChild(p);
         div.appendChild(resetButton);
-
-        const paperClone = btnPaper.cloneNode(true);
-        buttonsClass.appendChild(paperClone);
     }
 
     if (choices === 'rock scissors') {
@@ -150,12 +146,12 @@ function gameDisplay(playerSelection, computerSelection, gameWinner, playerScore
         p.textContent = 'DRAW!';
         resetButton.textContent = 'Play Again';
 
-        btn.appendChild(div);
+        buttonsClass.appendChild(div);
         div.appendChild(p);
         div.appendChild(resetButton);
 
         const scissorsClone = btnScissors.cloneNode(true);
-        btn.appendChild(scissorsClone);
+        buttonsClass.appendChild(scissorsClone);
     }
 
     if (choices === 'scissors rock') {

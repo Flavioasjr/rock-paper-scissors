@@ -1,5 +1,6 @@
 const btn = document.querySelector('.buttons');
 const results = document.querySelector('.results');
+const restartButton = document.createElement('button');
 
 function computerPlay() {
     const game = ['Rock', 'Paper', 'Scissors'];
@@ -179,26 +180,36 @@ function gameDisplay(playerSelection, computerSelection, gameWinner, playerScore
         div.appendChild(resetButton);
     }
 
+    div.classList.add('result-round');
+    resetButton.classList.add('btn');
+    resetButton.classList.add('btn-reset');
+
+    restartButton.textContent = 'Restart Game';
+    restartButton.classList.add('btn');
+    restartButton.classList.add('btn-restart');
+    div.appendChild(restartButton);
+
     resetButton.addEventListener('click', e => {
         location.reload();
     });
 
     if (gameWinner === 'player win') {
-        p.textContent = 'You won the game';
-        resetButton.textContent = 'Restart';
+        p.textContent = 'You won the game!';
+        resetButton.parentNode.removeChild(resetButton);
     }
 
     if (gameWinner === 'computer win') {
-        p.textContent = 'You lost the game';
-        resetButton.textContent = 'Restart';
+        p.textContent = 'You lost the game!';
+        resetButton.parentNode.removeChild(resetButton);
     }
 
     const pResults = document.createElement('p');
     pResults.textContent = `PLAYER ${playerScore} X ${computerScore} COMPUTER`;
 
     results.appendChild(pResults);
-
 }
+
+
 
 let playerScore = 0;
 let computerScore = 0;
@@ -220,17 +231,26 @@ function game(e) {
 
     const displayPlayerScore = playerScore;
     const displayComputerScore = computerScore;
-    if (playerScore >= 5) {
+
+    restartButton.addEventListener('click', () => {
+        localStorage.setItem('playerScore', 0);
+        localStorage.setItem('computerScore', 0);
+        location.reload();
+    });
+
+    if (playerScore >= 3) {
         playerScore = 0;
         computerScore = 0;
         gameWinner = 'player win';
     }
 
-    if (computerScore >= 5) {
+    if (computerScore >= 3) {
         playerScore = 0;
         computerScore = 0;
         gameWinner = 'computer win';
     }
+
+    
 
     localStorage.setItem('playerScore', playerScore);
     localStorage.setItem('computerScore', computerScore);
@@ -249,4 +269,5 @@ const btnScissors = document.querySelector('.btn-scissors')
 btnRock.addEventListener('click', game);
 btnPaper.addEventListener('click', game);
 btnScissors.addEventListener('click', game);
+
 

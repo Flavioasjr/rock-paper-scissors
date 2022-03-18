@@ -1,17 +1,21 @@
+body {
+    font-family: sans-serif;
+    background: rgb(50, 169, 157);
+    color: white;
+}
+
 input {
     width: 100px;
     height: 80px;
     background-color: coral;
 }
 
+
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
-}
-
-.results {
 }
 
 .buttons {
@@ -36,8 +40,20 @@ input {
     padding: 10px;
 }
 
+.result-round {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.result-round p {
+    font-size: 40px;
+    margin: 20px;
+    font-weight: 700;
+}
+
 .button {
-    background: white;
+    background: rgb(50, 169, 157);
     border: none;
     margin-right: 20px;
 }
@@ -45,9 +61,78 @@ input {
 img {
     width: 180px;
     height: 150px;
-    background: white;
+    background: rgb(50, 169, 157);
 }
 
 .button:hover {
     transform: scale(1.25);
 }
+
+.results p {
+    font-size: 35px;
+    border: 5px outset #fbfbfb;
+    padding: 15px;
+}
+
+.btn {
+    box-sizing: border-box;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: transparent;
+  border: 2px solid #e74c3c;
+  border-radius: 0.6em;
+  color: #e74c3c;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-self: center;
+      -ms-flex-item-align: center;
+          align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  margin: 20px;
+  padding: 1.2em 2.8em;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
+.btn:hover, .btn:focus {
+    color: #fff;
+    outline: 0;
+  }
+
+  .btn-reset {
+    border-color: #36e027;
+    color: #fff;
+    background-image: -webkit-linear-gradient(45deg, #36e027 50%, transparent 50%);
+    background-image: linear-gradient(45deg, #36e027 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    -webkit-transition: background 400ms ease-in-out;
+    transition: background 400ms ease-in-out;
+    width: 200px;
+  }
+  .btn-reset:hover {
+    background-position: 0;
+  }
+
+  .btn-restart {
+    border-color: #36e027;
+    color: #fff;
+    box-shadow: 0 0 40px 40px #36e027 inset, 0 0 0 0 #36e027;
+    -webkit-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 200px;
+  }
+  .btn-restart:hover {
+    box-shadow: 0 0 10px 0 #36e027 inset, 0 0 10px 4px #36e027;
+  }

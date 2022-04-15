@@ -62,11 +62,40 @@ function showResult(choices) {
     btnScissors.parentNode.removeChild(btnScissors);
     btnRock.parentNode.removeChild(btnRock);
 
-    for(let choice of choices) {
-        console.log(choice);
-        if (choice === 'rock') buttonsClass.appendChild(rockClone);
-        if (choice === 'paper') buttonsClass.appendChild(paperClone);
-        if (choice === 'scissors') buttonsClass.appendChild(scissorsClone);
+    for(let i = 0; i < choices.length; i++) {
+        if (choices[i] === 'rock') {
+            buttonsClass.appendChild(rockClone); 
+            if (i === 1) {
+                if (choices[0] === 'rock') {
+                    const rockClone2 = rockClone.cloneNode(true);
+                    buttonsClass.appendChild(rockClone2);
+                    return rockClone2;
+                }
+                return rockClone; 
+            }
+        } 
+        if (choices[i] === 'paper') {
+            buttonsClass.appendChild(paperClone);
+            if (i === 1) {
+                if (choices[0] === 'paper') {
+                    const paperClone2 = paperClone.cloneNode(true);
+                    buttonsClass.appendChild(paperClone2);
+                    return paperClone2;
+                }
+                return paperClone; 
+            }
+        }
+        if (choices[i] === 'scissors') {
+            buttonsClass.appendChild(scissorsClone);
+            if (i === 1) {
+                if (choices[0] === 'scissors') {
+                    const scissorsClone2 = scissorsClone.cloneNode(true);
+                    buttonsClass.appendChild(scissorsClone2);
+                    return scissorsClone2;
+                }
+                return scissorsClone; 
+            }
+        }
     }
 }
 
@@ -83,103 +112,20 @@ function gameDisplay(playerSelection, computerSelection, gameWinner, playerScore
     const resetButton = document.createElement('button');
     const p = document.createElement('p');
 
-    showResult(arrayChoices);
+    const buttonComputerSelection = showResult(arrayChoices);
+    
+    if (arrayChoices[0] === arrayChoices[1]) p.textContent = 'DRAW';
+    
+    if (choices === 'rock paper' || choices === 'paper scissors' || 
+    choices === 'scissors rock') p.textContent = 'LOSE';
 
-    // if (choices === 'rock rock') {
-    //     btnPaper.parentNode.removeChild(btnPaper);
-    //     btnScissors.parentNode.removeChild(btnScissors);
+    if (choices === 'rock scissors' || choices === 'paper rock' ||
+    choices === 'scissors paper') p.textContent = 'WIN';
+    
+    buttonsClass.insertBefore(div, buttonComputerSelection);
 
-    //     p.textContent = 'DRAW!';
-
-    //     buttonsClass.appendChild(div);
-    //     div.appendChild(p);
-
-    //     const rockClone = btnRock.cloneNode(true);
-    //     buttonsClass.appendChild(rockClone);
-    // }
-
-    // if (choices === 'rock paper') {
-    //     btnScissors.parentNode.removeChild(btnScissors);
-
-    //     p.textContent = 'LOSE!';
-
-    //     buttonsClass.insertBefore(div, btnPaper);
-    //     div.appendChild(p);
-    // }
-
-    // if (choices === 'rock scissors') {
-    //     btnPaper.parentNode.removeChild(btnPaper);
-
-    //     p.textContent = 'WIN!';
-
-    //     buttonsClass.insertBefore(div, btnScissors);
-    //     div.appendChild(p);
-    // }
-
-    // if (choices === 'paper paper') {
-    //     btnRock.parentNode.removeChild(btnRock);
-    //     btnScissors.parentNode.removeChild(btnScissors);
-
-    //     p.textContent = 'DRAW!';
-
-    //     buttonsClass.appendChild(div);
-    //     div.appendChild(p);
-
-    //     const paperClone = btnPaper.cloneNode(true);
-    //     buttonsClass.appendChild(paperClone);
-    // }
-
-    // if (choices === 'paper rock') {
-    //     btnScissors.parentNode.removeChild(btnScissors);
-
-    //     p.textContent = 'WIN!';
-
-    //     buttonsClass.insertBefore(div, btnPaper);
-    //     div.appendChild(p);
-    // }
-
-    // if (choices === 'paper scissors') {
-    //     btnRock.parentNode.removeChild(btnRock);
-
-    //     p.textContent = 'LOSE!';
-
-    //     buttonsClass.insertBefore(div, btnScissors);
-    //     div.appendChild(p);
-    // }
-
-    // if (choices === 'scissors scissors') {
-    //     btnRock.parentNode.removeChild(btnRock);
-    //     btnPaper.parentNode.removeChild(btnPaper);
-
-    //     p.textContent = 'DRAW!';
-
-    //     buttonsClass.appendChild(div);
-    //     div.appendChild(p);
-
-    //     const scissorsClone = btnScissors.cloneNode(true);
-    //     buttonsClass.appendChild(scissorsClone);
-    // }
-
-    // if (choices === 'scissors rock') {
-    //     btnPaper.parentNode.removeChild(btnPaper);
-
-    //     p.textContent = 'LOSE!';
-
-    //     buttonsClass.insertBefore(div, btnScissors);
-    //     div.appendChild(p);
-    // }
-
-    // if (choices === 'scissors paper') {
-    //     btnRock.parentNode.removeChild(btnRock);
-
-    //     p.textContent = 'WIN!';
-
-    //     buttonsClass.insertBefore(div, btnScissors);
-    //     div.appendChild(p);
-    // }
-
-    buttonsClass.appendChild(div);
     resetButton.textContent = 'Play Again';
+    div.appendChild(p);
     div.appendChild(resetButton);
 
     div.classList.add('result-round');
